@@ -45,6 +45,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Устанавливаем зависимости
+RUN npm config set strict-ssl false
+RUN npm install --network-timeout=600000
 RUN npm install
 
 # Устанавливаем Angular CLI глобально
