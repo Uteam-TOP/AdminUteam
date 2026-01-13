@@ -47,10 +47,9 @@ COPY package.json package-lock.json ./
 # Устанавливаем зависимости
 RUN npm config set strict-ssl false
 RUN npm install --network-timeout=600000
-RUN npm install
 
 # Устанавливаем Angular CLI глобально
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli --network-timeout 600000
 
 # Копируем остальные файлы проекта в контейнер
 COPY . .
