@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile-frontend
           tags: ${{ steps.meta.outputs.REPO_NAME }}:adminpanel
           load: true # Load to local Docker daemon for testing
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -70,7 +70,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile-frontend
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
@@ -122,7 +122,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile-frontend
           tags: adminuteam:prod
           load: true # Load to local Docker daemon for testing
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -140,7 +140,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: Dockerfile-frontend
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
