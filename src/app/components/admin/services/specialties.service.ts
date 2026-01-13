@@ -27,12 +27,12 @@ export class SpecialtiesService {
   private domain = `${environment.apiUrl}`;
 
   getFunction(page: any): Observable<any> {
-    return this.http.get<any>(`${this.domain}/tags?page=${page}&size=1000&types=${this.type}`,);
+    return this.http.get<any>(`${this.domain}/main/tag?page=${page}&size=1000&types=${this.type}`,);
   }
 
   addFunction(tag: tag): Observable<any> {
     return this.http.post<any>(`${this.domain}/tags`,  tag, {
-      headers: { 'Content-Type': 'application/json' } 
+      headers: { 'Content-Type': 'application/json' }
     });
 
   }
@@ -44,7 +44,7 @@ export class SpecialtiesService {
 
   putFunction(tag: tag, id: string): Observable<any> {
     return this.http.put<any>(`${this.domain}/tags/${id}`, tag, {
-      headers: { 'Content-Type': 'application/json' } 
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 
@@ -52,25 +52,25 @@ export class SpecialtiesService {
   page: any = 0
 
   getDataStatuses() {
-    this.loading = true; 
+    this.loading = true;
     this.getFunction(this.page).subscribe(
       (response: tag[]) => {
-        this.loading = false; 
+        this.loading = false;
         if (response.length > 0) {
-          this.products = [...(this.products || []), ...response]; 
-          this.page += 1; 
+          this.products = [...(this.products || []), ...response];
+          this.page += 1;
         }
       },
       (error: any) => {
-        this.loading = false; 
+        this.loading = false;
         console.error('Error:', error);
       }
     );
   }
   addsFunction(tags: tag[]): Observable<any> {
     return this.http.post<any>(`${this.domain}/tags/addAll`,  tags, {
-      headers: { 'Content-Type': 'application/json' } 
+      headers: { 'Content-Type': 'application/json' }
     });
   }
-  
+
 }

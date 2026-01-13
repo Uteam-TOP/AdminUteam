@@ -8,12 +8,12 @@ import { environment } from '../../../environment';
 })
 export class UserAccountService {
   private domain = `${environment.apiUrl}`;
-  private subscription = new Subscription(); 
+  private subscription = new Subscription();
 
   constructor(private http: HttpClient) { }
 
   getUserData(nick: string): Observable<any> {
-    return this.http.get(`${this.domain}/users/byNickname/${nick}`);
+    return this.http.get(`${this.domain}/secured/users/currentUser`);
   }
 
   getVacanciesData(id: string): Observable<any> {
@@ -23,7 +23,7 @@ export class UserAccountService {
   }
 
   getResumessData(id: string): Observable<any> {
-    return this.http.post(`${this.domain}/resumes/getAll?page=0&size=1000`, {"userId": id, "visibilities": [
+    return this.http.post(`${this.domain}/main/resume/getAll?page=0&size=1000`, {"userId": id, "visibilities": [
     "CREATOR_ONLY"
   ]});
   }
@@ -37,7 +37,7 @@ export class UserAccountService {
     this.subscription.add(sub);
   }
 
-  
+
   unsubscribe(): void {
     this.subscription.unsubscribe();
   }

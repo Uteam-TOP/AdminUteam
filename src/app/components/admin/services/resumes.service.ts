@@ -18,7 +18,7 @@ export class ResumesService {
   private domain = `${environment.apiUrl}`;
 
   getFunction(page: any, rowsPerPage: any): Observable<any> {
-    return this.http.post<any>(`${this.domain}/resumes/getAll?page=${page}&size=${rowsPerPage}`, this.body);
+    return this.http.post<any>(`${this.domain}/main/resume/getAll?page=${page}&size=${rowsPerPage}`, this.body);
   }
 
 
@@ -73,7 +73,7 @@ export class ResumesService {
   deleteCard(id: string) {
     this.deleteFunction(id).subscribe(
       (response: any) => {
-        
+
       },
       (error: any) => {
         console.error('Error:', error);
@@ -101,5 +101,5 @@ export class ResumesService {
       }
     );
   }
-  
+
 }

@@ -15,7 +15,7 @@ export class UsersService {
   private domain = `${environment.apiUrl}`;
 
   getFunction(page: any, rowsPerPage: any): Observable<any> {
-    return this.http.get<any>(`${this.domain}/users?page=${page}&size=${rowsPerPage}`);
+    return this.http.get<any>(`${this.domain}/secured/users/page?page=${page}&size=${rowsPerPage}`);
   }
 
 
@@ -54,7 +54,7 @@ export class UsersService {
       }
     );
   }
-  
+
 
   deleteUser(id: string) {
     this.deleteFunction(id).subscribe(

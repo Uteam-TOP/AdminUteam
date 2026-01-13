@@ -1,4 +1,4 @@
 export const environment = {
-    apiUrl: 'https://uteam.top/api',
-    userNameBot: 'UcomandTOP_bot'
+    apiUrl: 'https://dev.uteam.top/api',
+    userNameBot: 'uteam_admin_bot'
 };

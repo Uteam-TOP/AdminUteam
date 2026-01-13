@@ -24,7 +24,7 @@ export class SkillsService {
   private domain = `${environment.apiUrl}`;
 
   getFunction(page: any): Observable<any> {
-    return this.http.get<any>(`${this.domain}/tags?page=${page}&size=1000&types=${this.type}`,);
+    return this.http.get<any>(`${this.domain}/main/tag?page=${page}&size=1000&types=${this.type}`,);
   }
 
   addFunction(tag: tag): Observable<any> {
@@ -49,25 +49,25 @@ export class SkillsService {
   page: any = 0
 
   getDataStatuses() {
-    this.loading = true; 
+    this.loading = true;
     this.getFunction(this.page).subscribe(
       (response: tag[]) => {
         if (response.length > 0) {
-          this.products = [...(this.products || []), ...response]; 
-          this.page += 1; 
+          this.products = [...(this.products || []), ...response];
+          this.page += 1;
           console.log("this.page",this.page)
-          this.getDataStatuses()
+          // this.getDataStatuses()
         }else{
-          
+
         }
       },
       (error: any) => {
-        this.loading = false; 
+        this.loading = false;
         console.error('Error:', error);
       }
     );
   }
-  
+
 
   addsFunction(tags: tag[]): Observable<any> {
     return this.http.post<any>(`${this.domain}/tags/addAll`, tags, {

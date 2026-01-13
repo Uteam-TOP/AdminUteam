@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -29,7 +29,7 @@ interface tag {
   templateUrl: './tags.component.html',
   styleUrl: './tags.component.css'
 })
-export class TagsComponent {
+export class TagsComponent implements OnInit {
   @Input() Service: any;
   @Input() Title: string = '';
   @Input() IsDropList: boolean = false;
@@ -42,6 +42,7 @@ export class TagsComponent {
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+    console.log('set_');
     this.Service.getDataStatuses()
   }
 
