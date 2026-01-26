@@ -42,9 +42,12 @@ const routes: Routes = [
       {
         path: 'wordManager', loadChildren: () => import('./word-manager/word-manager.module').then(m => m.WordManagerModule)
       },
+      {
+        path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
+      },
     ]
   },
-  
+
 ];
 
 @NgModule({

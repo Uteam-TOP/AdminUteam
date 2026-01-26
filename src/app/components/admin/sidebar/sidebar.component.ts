@@ -18,6 +18,9 @@ export class SidebarComponent implements OnInit {
       label: 'Главная', icon: 'pi pi-home', command: 'home'
     },
     {
+      label: 'Проекты', icon: 'pi pi-file', command: 'projects'
+    },
+    {
       label: 'Персонал', icon: 'pi pi-home', command: 'personal'
     },
     {
@@ -47,8 +50,8 @@ export class SidebarComponent implements OnInit {
     {
       label: 'Слова исключения', icon: 'pi pi-cog', command: 'wordManager'
     },
-    
-    
+
+
     {
       label: 'Выйти', icon: 'pi pi-sign-out', command: 'exit'
     }
@@ -90,7 +93,7 @@ export class SidebarComponent implements OnInit {
         content.style.paddingLeft = this.sidebarService.isMobileScreen$ ? '0' : '210px';
         header.style.paddingLeft = this.sidebarService.isMobileScreen$ ? '0' : '210px';
       }
-     
+
     }
   }
 

@@ -9,6 +9,7 @@ import { FormUserComponent } from './form-user/form-user.component';
 import { Router } from '@angular/router';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TagModule } from 'primeng/tag';
+import {environment} from "../../../../environment";
 
 @Component({
   selector: 'app-list-users',
@@ -39,13 +40,13 @@ export class ListUsersComponent {
     this.page = 0;
     this.loadUsers();
   }
-  
+
   // onTableScroll(event: any) {
   //   if(!this.isAllCard){
   //     const element = event.target;
   //     const pos = element.scrollTop + element.offsetHeight;
   //     const max = element.scrollHeight;
-  
+
   //     if (pos >= max - 50 && !this.loading) {
   //       this.page++;
   //       this.loadUsers();
@@ -58,31 +59,31 @@ export class ListUsersComponent {
       const element = event.target;
       const pos = element.scrollTop + element.offsetHeight;
       const max = element.scrollHeight;
-  
+
       if (pos >= max - 50 && !this.loading) {
         this.page++;
         this.loadUsers();
       }
     }
   }
- 
+
 
   loadUsers() {
     this.loading = true;
     this.usersService.getFunction(this.page, this.rowsPerPage).subscribe(
       (response: any[]) => {
         if (response.length > 0) {
-          const newUsers = response.filter(newUser => 
+          const newUsers = response.filter(newUser =>
             !this.users.some(existingUser => existingUser.id === newUser.id)
           );
-          
+
           this.users = [...(this.users || []), ...newUsers];
           console.log(" response",response)
           console.log(" this.page",this.page)
           // Обновляем представление сразу после изменения данных
           this.cd.detectChanges();
 
-         
+
           this.loading = false;
         } else {
           this.loading = false;
@@ -111,12 +112,12 @@ trackByUserId(index: number, user: any): number {
   //   return this.router.createUrlTree([``, nick]).toString();
   // }
   viewUser(nick: string): string {
-    return `https://uteam.top/${nick}`;
+    return `${environment.mainUrl}/${nick}`;
   }
-  
+
   selectUser: any;
 
-  
+
   openModal() {
     this.isModalVisible = true;
   }
@@ -153,7 +154,7 @@ trackByUserId(index: number, user: any): number {
   validateBanReason() {
     this.isBanReasonInvalid = this.banReason.trim() === '';
   }
-  
+
   deleteUser(id: string){
     this.usersService.deleteUser(id);
   }

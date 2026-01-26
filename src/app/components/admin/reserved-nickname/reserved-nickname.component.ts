@@ -21,14 +21,14 @@ export class ReservedNicknameComponent implements OnInit {
   constructor(public reservedNicknameService: ReservedNicknameService) { }
 
   ngOnInit(): void {
-
+    this.reservedNicknameService.getTags()
   }
 
   onSearchValueChange(value: string) {
     if (value.length > 0) {
       this.reservedNicknameService.getTags(value);
     } else {
-      this.reservedNicknameService.products = [];
+      this.reservedNicknameService.getTags();
     }
   }
 

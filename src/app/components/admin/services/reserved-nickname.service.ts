@@ -21,10 +21,10 @@ export class ReservedNicknameService {
 
     const params = searchValue ? new HttpParams().set('search', searchValue) : new HttpParams();
 
-    return this.http.get<any>(`${this.domain}/reservedNicknames`, { headers, params });
+    return this.http.get<any>(`${this.domain}/main/reserved-nicknames`, { headers, params });
   }
 
-  getTags(searchValue: string) {
+  getTags(searchValue: string | null = null) {
     this.getFunction(searchValue).subscribe((response) => {
         this.products = response;
       }
@@ -36,7 +36,7 @@ export class ReservedNicknameService {
     const token = localStorage.getItem('YXV0aEFkbWluVG9rZW4=');
     const headers = new HttpHeaders({ 'Content-Type': 'text/plain', 'Authorization': `Bearer ${token}` });
 
-    return this.http.post<any>(`${this.domain}/reservedNicknames`,value, {
+    return this.http.post<any>(`${this.domain}/reserved-nicknames`,value, {
       headers,
       responseType: 'json'
     });
@@ -59,7 +59,7 @@ export class ReservedNicknameService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.delete<any>(`${this.domain}/reservedNicknames/${value}`, { headers });
+    return this.http.delete<any>(`${this.domain}/reserved-nicknames/${value}`, { headers });
   }
 
   deleteTag(value: string) {

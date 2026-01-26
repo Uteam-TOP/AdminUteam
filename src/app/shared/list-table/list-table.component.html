@@ -1,0 +1,75 @@
+<div class="container">
+<!--  <p-multiSelect [options]="types" [(ngModel)]="selectedtypes" optionLabel="name" placeholder="Выбрать тип карточек"-->
+<!--                 (onChange)="filterProducts()" />-->
+
+  <div #tableContainer class="table-wrapper">
+    <p-table  [value]="data" [rows]="rowsPerPage" [sortField]="sortField" [sortOrder]="sortOrder" >
+      <ng-template pTemplate="header">
+        <tr>
+          @for (column of columns; track column) {
+            <th pSortableColumn="id" style="width:10%">
+              {{ column.name }} <p-sortIcon field="{{ column.type }}" />
+            </th>
+          }
+          <th style="width:3%">
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        @for (row of data; track row.id) {
+          <tr>
+            @for (column of columns; track column) {
+
+              @if (column.type === 'owner.nickname') {
+                <td>{{ row?.owner.nickname }}</td>
+              } @else if (column.type === 'createdAt') {
+                <td>{{ (row?.[column.type])*1000 | date: 'dd/MM/yyyy' }}</td>
+              } @else {
+                <td>{{ row?.[column.type] }}</td>
+              }
+            }
+            <td>
+              <p-button (click)="op.toggle($event)" icon="pi pi-ellipsis-v" [rounded]="true" [text]="true" />
+              <p-overlayPanel #op>
+                <div class="btnsSetting">
+
+                  <a [href]="viewItem(row.nickname)" target="_blank">
+                    <p-button icon="pi pi-file" label="Подробнее" [rounded]="true" [text]="true">
+                    </p-button>
+                  </a>
+
+                  <p-button icon="pi pi-times" label="Удалить" [rounded]="true" [text]="true"
+                            severity="danger" (click)="openDeletePopup(row)" />
+
+                </div>
+              </p-overlayPanel>
+            </td>
+          </tr>
+        }
+
+      </ng-template>
+    </p-table>
+
+
+    <div class="modal" *ngIf="isModalVisible">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>Удалить</h2>
+        <p>Вы действительно хотите удалить {{ deletedItem.title }}
+        </p>
+
+        <div class="btns">
+
+          <p-button icon="pi pi-pencil"
+                    label="Да"
+                    [rounded]="true" [text]="true" (click)="deleteButton(deletedItem.id)" />
+
+          <p-button icon="pi pi-times" label="Отмена" [rounded]="true" [text]="true" severity="danger"
+                    (click)="closeModal()" />
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

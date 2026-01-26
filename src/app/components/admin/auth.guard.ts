@@ -29,7 +29,8 @@ export class AuthGuard implements CanActivate {
     });
 
     return this.http.get<any>(`${environment.apiUrl}/secured/users/currentUser`, { headers }).pipe(
-      map(() => true),  // Если данные возвращены успешно, возвращаем true
+      map((result: any) =>
+        !!(result && (result.nickname === "timezero999" || result.nickname === "cdss13" || result.role === "ADMIN"))),  // Если данные возвращены успешно, возвращаем true
       catchError(() => {
         this.tokenService.clearToken()
         localStorage.removeItem('userNickname');

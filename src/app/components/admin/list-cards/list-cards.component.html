@@ -26,7 +26,7 @@
                     <th style="width:15%">
                         Статус
                     </th>
-                    <th style="width:15%">
+                    <th style="width:5%">
                     </th>
                 </tr>
             </ng-template>
@@ -77,9 +77,9 @@
         </p-table>
         <!-- Loading spinner while fetching data -->
         <div *ngIf="loading" class="loading-spinner">Loading...</div>
-        
+
         <app-forms *ngIf="listCardsService.visibleForm" [editData]="editData"></app-forms>
-        
+
         <div class="modal" *ngIf="isModalVisible">
             <div class="modal-content">
                 <span class="close" (click)="closeModal()">&times;</span>

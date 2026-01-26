@@ -12,6 +12,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TagModule } from 'primeng/tag';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {environment} from "../../../../environment";
 
 interface Type {
   name: string,
@@ -67,7 +68,7 @@ export class ListCardsComponent {
       const element = event.target;
       const pos = element.scrollTop + element.offsetHeight;
       const max = element.scrollHeight;
-  
+
       if (pos >= max - 50 && !this.loading) {
         this.page++;
         this.fetchData();
@@ -164,18 +165,18 @@ export class ListCardsComponent {
   onRowCollapse(event: TableRowCollapseEvent) {
 
   }
- 
-  
+
+
   viewCard(id: string) {
     console.log("this.Service.type",this.Service.type)
     if (this.Service.type === "RESUME") {
       // localStorage.setItem('routeTypeCard', 'resumes');
       // return this.router.createUrlTree([`/resume`, id]).toString(); // You might not need this if you're handling URL strings
-      return `https://uteam.top/resume/${id}`;
+      return `${environment.mainUrl}/resume/${id}`;
     } else {
       // localStorage.setItem('routeTypeCard', 'vacancies');
       // return this.router.createUrlTree([`/vacancy`, id]).toString(); // You might not need this if you're handling URL strings
-      return `https://uteam.top/vacancy/${id}`;
+      return `${environment.mainUrl}/vacancy/${id}`;
     }
   }
 
