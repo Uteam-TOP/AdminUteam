@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
 interface tag {
-  id: number;
+  id: number | null;
   name: string;
   nameEng: string;
   competenceLevel: number|null;
@@ -49,7 +49,7 @@ export class TagFormComponent implements OnInit {
       const formValue = this.tagForm.value;
 
       const tagToSubmit: tag = {
-        id: this.tagData ? this.tagData.id : 0,
+        id: this.tagData ? this.tagData.id : null,
         name: formValue.name,
         nameEng: formValue.nameEng,
         competenceLevel: null,
