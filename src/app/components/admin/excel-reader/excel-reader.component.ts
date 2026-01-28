@@ -76,7 +76,7 @@ export class ExcelReaderComponent {
   sendChunk(chunk: any[]) {
     const tagsToSubmit = chunk.map((name, index) => {
       return {
-        id: 0,
+        id: null,
         name: name,
         nameEng: null,
         competenceLevel: null,
