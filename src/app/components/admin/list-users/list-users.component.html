@@ -11,10 +11,7 @@
                         ID <p-sortIcon field="id" />
                     </th>
                     <th pSortableColumn="firstName" style="width:15%">
-                        Имя <p-sortIcon field="firstName" />
-                    </th>
-                    <th pSortableColumn="lastName" style="width:15%">
-                        Фамилия <p-sortIcon field="lastName" />
+                        ФИО <p-sortIcon field="firstName" />
                     </th>
                     <th pSortableColumn="nickname" style="width:20%">
                         Логин <p-sortIcon field="nickname" />
@@ -29,6 +26,9 @@
                         Статус
                     </th>
                     <th style="width:15%">
+                      Ачивки
+                    </th>
+                    <th style="width:15%">
                     </th>
                 </tr>
             </ng-template>
@@ -36,8 +36,7 @@
                 <tr>
                     <td><p-button icon="pi pi-pencil" [text]="true" (onClick)="editUser(user)" /></td>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.firstName }} {{ user.lastName }}</td>
                     <td>{{ user.nickname}}</td>
                     <td>{{ user.telegram }}</td>
                     <td>{{ user.dateOfRegistration | date: 'dd/MM/yyyy' }}</td>
@@ -51,6 +50,11 @@
                             <!-- красная  -->
                         </ng-container>
                     </td>
+                    <p-multiSelect [options]="achievements()" [ngModel]="selectedAchievements()" optionLabel="title" placeholder="Ачивки"
+                                    selectedItemsLabel="Ачивки"
+                                   [maxSelectedLabels]="0"
+                                   (onPanelShow)="fillAchievements(user.id)"
+                                   (onChange)="updateAchievements(user, $event)" />
                     <td>
                         <p-button (click)="op.toggle($event)" icon="pi pi-ellipsis-v" [rounded]="true" [text]="true" />
                         <p-overlayPanel #op>

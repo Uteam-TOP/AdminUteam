@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, NgZone } from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, inject, NgZone, signal} from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
@@ -10,15 +10,20 @@ import { Router } from '@angular/router';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TagModule } from 'primeng/tag';
 import {environment} from "../../../../environment";
+import {MultiSelectModule} from "primeng/multiselect";
+import {toSignal} from "@angular/core/rxjs-interop";
+import {AchievementsService} from "../services/achievements.service";
 
 @Component({
   selector: 'app-list-users',
   standalone: true,
-  imports: [TableModule, CommonModule, PaginatorModule, ButtonModule, FormUserComponent, OverlayPanelModule, TagModule],
+  imports: [TableModule, CommonModule, PaginatorModule, ButtonModule, FormUserComponent, OverlayPanelModule, TagModule, MultiSelectModule],
   templateUrl: './list-users.component.html',
   styleUrl: './list-users.component.css'
 })
 export class ListUsersComponent {
+
+  private achievementsService = inject(AchievementsService);
 
   users: any[] = [];
   selectedUser: any | null = null;
@@ -33,6 +38,10 @@ export class ListUsersComponent {
   isBanReasonInvalid: boolean = false;
   loading = true;
   isAllCard: boolean = false;
+  selectedAchievements = signal([]);
+  achievements = toSignal(this.achievementsService.getAchievements());
+
+  isProcessing = false;
 
   constructor(public usersService: UsersService, private zone: NgZone,  private router: Router,  private cd: ChangeDetectorRef,  public listUsersService: ListUsersService) { }
 
@@ -157,6 +166,25 @@ trackByUserId(index: number, user: any): number {
 
   deleteUser(id: string){
     this.usersService.deleteUser(id);
+  }
+
+  fillAchievements(userId: number) {
+    this.achievementsService.getUserAchievements(userId).subscribe(result => {
+      this.selectedAchievements.set(result)
+    })
+  }
+
+  updateAchievements(user: any, event: any) {
+    if (event.originalEvent.selected) {
+      console.log('add', event.itemValue);
+      this.achievementsService.setUserAchievement(user.id, event.itemValue.id).subscribe(result => {
+        console.log(result.message);
+      })
+    } else {
+      this.achievementsService.deleteUserAchievement(user.id, event.itemValue.id).subscribe(result => {
+        console.log(result.message);
+      })
+    }
   }
 
 }

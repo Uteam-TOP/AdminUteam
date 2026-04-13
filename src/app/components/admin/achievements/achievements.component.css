@@ -1,0 +1,25 @@
+.create-achievement {
+  width: 300px;
+  margin: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.horiz {
+  display: flex;
+  justify-content: space-between;
+
+  .valueItem {
+    display: flex;
+    gap: 30px
+  }
+}
