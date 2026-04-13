@@ -50,6 +50,9 @@ export class SidebarComponent implements OnInit {
     {
       label: 'Слова исключения', icon: 'pi pi-cog', command: 'wordManager'
     },
+    {
+      label: 'Ачивки', icon: 'pi pi-cog', command: 'achievements'
+    },
 
 
     {

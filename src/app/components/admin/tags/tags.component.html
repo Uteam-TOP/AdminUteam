@@ -2,9 +2,9 @@
 <p-button label="Добавить"  (onClick)="addTag()" *ngIf="!visibleForm"/>
 <p-button label="Скрыть"  (onClick)="resetForm()" *ngIf="visibleForm"/>
 <ng-container *ngIf="Service.visibleForm">
-    <div class="createStatus" >            
+    <div class="createStatus" >
         <app-tag-form [Service]="Service" [tagData]="editTag" ></app-tag-form>
-            <app-excel-reader style="display: flex; flex-direction: row; gap: 0.5rem;" [nameFile]="'sample'" [typeTags]="Service.type" [Service]="Service"></app-excel-reader>
+        <app-excel-reader style="display: flex; flex-direction: row; gap: 0.5rem;" [nameFile]="'sample'" [typeTags]="Service.type" [Service]="Service"></app-excel-reader>
     </div>
 </ng-container>
 
@@ -24,9 +24,9 @@
                         <p *ngIf="product.nameEng">
                             {{product.nameEng}}
                         </p>
-                        
+
                     </div>
-                    
+
                 </div>
                 <p-button (click)="op.toggle($event)" icon="pi pi-ellipsis-v" [rounded]="true" [text]="true" />
                 <p-overlayPanel #op>

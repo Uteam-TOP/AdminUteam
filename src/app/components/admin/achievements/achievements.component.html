@@ -1,0 +1,58 @@
+<h3>Ачивки</h3>
+<p-button label="Добавить"  (onClick)="addAchievement()" *ngIf="!visibleForm"/>
+<p-button label="Скрыть"  (onClick)="resetForm()" *ngIf="visibleForm"/>
+<ng-container *ngIf="visibleForm">
+  <div class="create-achievement" >
+    <form [formGroup]="achievementForm" (ngSubmit)="onSubmit()" >
+      <div class="p-field">
+        <label for="name">Название</label>
+        <input pInputText id="name" formControlName="title" style="width: 100%;"/>
+      </div>
+
+      <div class="p-field">
+        <label for="nameEng">Иконка</label>
+        <input type="file" id="nameEng" style="width: 100%;" (change)="onImageChange($event)"/>
+      </div>
+
+      <p-button icon="pi pi-save" type="submit"></p-button>
+    </form>
+
+  </div>
+</ng-container>
+
+
+@if (achievements(); as achievements) {
+  <p-orderList [value]="achievements" [listStyle]="{ 'max-height': '30rem' }" filterBy="name" filterPlaceholder="Название">
+    <ng-template let-achievement pTemplate="item" style="border-bottom: 1px solid red;">
+      <div class="flex flex-wrap p-2 align-items-center gap-3">
+        <div class="horiz">
+          <div class="valueItem">
+            <p>
+              {{achievement.id}}
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem; justify-content: center" >
+              <p>
+                {{achievement.title}}
+              </p>
+            </div>
+            <div class="achievement-image">
+              <img src="{{achievement.image}}" alt="image" />
+            </div>
+          </div>
+
+          <div>
+            <p-button (click)="op.toggle($event)" icon="pi pi-ellipsis-v" [rounded]="true" [text]="true" />
+            <p-overlayPanel #op>
+              <div class="btnsSetting">
+                <p-button icon="pi pi-times" label="Удалить" [rounded]="true" [text]="true" severity="danger"
+                          (click)="onRowDelete(achievement.id)" />
+              </div>
+            </p-overlayPanel>
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+  </p-orderList>
+}
+

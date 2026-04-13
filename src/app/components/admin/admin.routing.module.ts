@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import {AchievementsComponent} from "./achievements/achievements.component";
 
 
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
       },
       {
         path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
+      },
+      {
+        path: 'achievements',
+        loadComponent: () => import('./achievements/achievements.component')
+          .then(m => m.AchievementsComponent)
       },
     ]
   },
