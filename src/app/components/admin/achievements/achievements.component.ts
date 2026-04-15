@@ -45,6 +45,7 @@ export class AchievementsComponent implements OnInit {
     this.achievementForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(150)]],
       image: [],
+      description: ['']
     })
 
     this.updateAchievements();
@@ -74,7 +75,8 @@ export class AchievementsComponent implements OnInit {
         mergeMap(data => {
           const addData = {
             title: this.achievementForm.value.title,
-            image: data.message
+            image: data.message,
+            description: this.achievementForm.value.description,
           }
           return this.achievementsService.addAchievement(addData)
         })

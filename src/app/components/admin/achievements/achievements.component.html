@@ -10,6 +10,11 @@
       </div>
 
       <div class="p-field">
+        <label for="name">Описание</label>
+        <textarea formControlName="description" placeholder="Введите описание" rows="6"></textarea>
+      </div>
+
+      <div class="p-field">
         <label for="nameEng">Иконка</label>
         <input type="file" id="nameEng" style="width: 100%;" (change)="onImageChange($event)"/>
       </div>
@@ -33,6 +38,11 @@
             <div style="display: flex; flex-direction: column; gap: 0.3rem; justify-content: center" >
               <p>
                 {{achievement.title}}
+              </p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.3rem; justify-content: center" >
+              <p>
+                {{achievement.description}}
               </p>
             </div>
             <div class="achievement-image">
