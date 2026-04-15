@@ -11,9 +11,20 @@
       display: inline-block;
       margin-bottom: 5px;
     }
+
+    .p-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
   }
 }
-
+.achievement-image {
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
 .horiz {
   display: flex;
   justify-content: space-between;
